@@ -1,0 +1,39 @@
+colors = ['red', 'green', 'blue']
+
+states = ['WA', 'NT', 'Q', 'NSW','V','SA']
+
+neighbors = {}
+neighbors['WA'] = ['NT', 'SA'] 
+neighbors['NT'] = ['WA', 'SA', 'Q']
+neighbors['Q'] = ['NT', 'SA', 'NSW']
+neighbors['NSW'] = ['Q', 'SA','V']
+neighbors['V'] = ['SA','NSW']
+neighbors['SA'] = ['WA', 'NT','Q','NSW','V']
+
+colors_of_states = {}
+
+def promising(state, color):
+    for neighbor in neighbors.get(state): 
+        color_of_neighbor = colors_of_states.get(neighbor)
+        if color_of_neighbor == color:
+            return False
+
+    return True
+
+def get_color_for_state(state):
+    for color in colors:
+        if promising(state, color):
+            return color
+
+def main():
+    for state in states:
+        colors_of_states[state] = get_color_for_state(state)
+    print("\nAssigned Colors for the vertices are : \n")
+    print(colors_of_states)
+
+if __name__ == '__main__':
+    print("\nGiven Graph is : \n")
+    print(neighbors)
+    main()
+
+
