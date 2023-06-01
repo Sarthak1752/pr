@@ -1,0 +1,37 @@
+graph = {
+ '5' : ['3','7'],
+ '3' : ['2', '4'],
+ '7' : ['8'],
+ '2' : [],
+ '4' : ['8'],
+ '8' : []
+}
+visited = set()
+queue = []
+def bfs(visited, graph, node):
+ visited.add(node)
+ queue.append(node)
+
+ while queue:
+     m = queue.pop(0)
+     print(m, end= " ")
+
+
+     for neighbour in graph[m]:
+         if neighbour not in visited:
+             visited.add(neighbour)
+             queue.append(neighbour)
+
+visited2= set()
+def dfs(visited2, graph, node):
+    if node not in visited2:
+        print(node, end=" ")
+        visited2.add(node)
+        for neighbour in graph[node]:
+            dfs(visited2, graph, neighbour)
+
+print("\n______Following is the breadth first search_________")
+bfs(visited,graph,'5')
+print("\n______Following is the depth first search_________")
+dfs(visited2,graph,'5')
+

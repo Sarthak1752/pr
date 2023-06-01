@@ -1,0 +1,37 @@
+rules = {
+    'Rule1' : {'condition': 'fever', 'action' : 'take paracetamol (Crocin)'},
+'Rule2' : {'condition': 'cough', 'action' : 'take cough syrup (Recommendation: Benadryl)'},
+'Rule3' : {'condition': 'headache', 'action' : 'take saridon tablet'},
+'Rule4' : {'condition': 'muscle pain', 'action' : 'take painkiller'}
+}
+
+name = input("Hello! \nEnter Your Name: ")
+print("Hello",name,"Welcome to Medical Expert System")
+print("============================================")
+
+def expert_system():
+    satisfaction = False
+    while not satisfaction:
+        user_input = input("Please Enter your symptoms form the given list[fever, cough, headache, muscle pain]\n(separated by commas): ")
+        symptoms = [symptom.strip().lower()for symptom in user_input.split(',')]
+
+        recommendations=[]
+        for rule in rules.values():
+            if rule['condition'] in symptoms:
+                recommendations.append(rule['action'])
+
+        if recommendations:
+            print("Recommendation: ")
+            for recommendation in recommendations:
+                print("- "+recommendation)
+            satisfied = input("Are you satisfied with the recommendation? (yes/no): ")
+            if satisfied.lower()=='yes':
+                satisfaction = True
+        else: print("No recommendation found. Provide more info or refine the query")
+    print("Thank you for using our system!")
+
+expert_system()
+
+
+
+
